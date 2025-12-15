@@ -10,7 +10,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
     devtools (>= 2.4.6),
+    dplyr,
+    forcats,
+    readr,
+    stringr,
     usethis (>= 3.2.1)
-Remotes:  
+Remotes: 
     r-lib/devtools,
     r-lib/usethis
