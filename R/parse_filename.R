@@ -15,11 +15,11 @@ parse_filename <- function(filepath){
 
   # parse filename
   filename <- filename |> stringr::str_split_1("_")
-  scenario <- paste(
-    filename[3], # disease
-    stringr::str_extract(filename[4], "^I\\d+"), # intervention ID
-    sep = "_"
-  )
+  scenario <- filename[3] # disease, to start
+  # tack on intervention id, if it exists
+  intv_id <- stringr::str_extract(filename[4], "^I\\d+")
+  if(!is.na(intv_id)) scenario <- paste(scenario, intv_id, sep = "_")
+
   list(
     model = filename[1],
     filetype = filename[2],

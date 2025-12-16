@@ -19,6 +19,7 @@ Remotes:
     r-lib/devtools,
     r-lib/usethis
 Suggests: 
+    glue,
     testthat (>= 3.0.0),
     tidyr
 Config/testthat/edition: 3
