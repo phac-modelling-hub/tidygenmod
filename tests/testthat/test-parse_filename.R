@@ -16,13 +16,12 @@ test_that("parse filename into list with correct format", {
   )
 
   # check with intervention id
-  id_scenario <- glue::glue("{id_scenario}_I0")
   expect_identical(
-    parse_filename(glue::glue("{model}_{filetype}_{id_scenario}.csv")),
+    parse_filename(glue::glue("{model}_{filetype}_{id_scenario}_I0.csv")),
     list(
       model = model,
       filetype = filetype,
-      id_scenario = id_scenario
+      id_scenario = glue::glue("{id_scenario}_I0")
     )
   )
 
