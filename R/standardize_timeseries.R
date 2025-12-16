@@ -10,25 +10,25 @@ standardize_timeseries <- function(filepath, pop.factor_abm=20){
 
   df <- readr::read_csv(filepath, show_col_types = FALSE)
 
-  # rename cols to standardize for calculations below
+  # rename cols for abm
   if(ff$model=="abm"){
-    df <- (df
-           |> dplyr::rename(
-             id = IT, time = DAY, epi = OUTCOME, age = AGE_GRP, value = VALUE
-           ))
+    df <- dplyr::rename(
+      df,
+      id = IT, time = DAY, epi = OUTCOME,
+      age = AGE_GRP, value = VALUE
+    )
   }
 
-  # standardize outcome names
-  df <- dplyr::inner_join(df, lookup_outcomes() |> dplyr::select(-outcome_label), by = dplyr::join_by(epi == !!rlang::sym(ff$model)))
-
-  # final touches
-  (df
-    |> dplyr::mutate(model = !!ff$model, id_scenario = !!ff$id_scenario)
-    |> dplyr::select(id_scenario, model, outcome, time, id, age, value)
-    # aggregate across age groups
-    |> dplyr::group_by(dplyr::across(-c(age, value)))
-    |> dplyr::summarize(value = sum(value), .groups = "drop")
-    # normalize by population factor
-    |> dplyr::mutate(value = value/pop.factor)
-  )
+  df |> dplyr::inner_join( # standardized outcome names
+    lookup_outcomes() |>
+      dplyr::select(-outcome_label),
+    by = dplyr::join_by(epi == !!rlang::sym(ff$model))) |>
+    dplyr::mutate(
+      model = !!ff$model,
+      id_scenario = !!ff$id_scenario
+    ) |>
+    dplyr::mutate(value = value/pop.factor) |>
+    dplyr::select(
+      id_scenario, model, outcome, time, id, age, value
+    )
 }

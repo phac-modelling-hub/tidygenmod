@@ -1,6 +1,6 @@
 requireNamespace("tidyr", quietly = TRUE)
 
-names_ts <- c("id_scenario", "model", "outcome", "time", "id", "value")
+names_ts <- c("id_scenario", "model", "outcome", "time", "id", "age", "value")
 
 test_that("standardized timeseries have expected format for epac model", {
   df <- standardize_timeseries(testthat::test_path("fixtures", "epac_timeseries_flu1918_I0.csv"))
