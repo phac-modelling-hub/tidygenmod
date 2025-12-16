@@ -13,9 +13,12 @@ lookup_outcomes <- function(){
     ~epac, # as labelled in EPAC files
     ~outcome_label, # outcome label for plotting
     "incidence", "Infections", "incidence", "Incident infections",
-    "hospital_admission", "Hospitalisations", "acute care admission", "Acute care admissions",
-    "hospital_occupancy", NA, "acute care occupancy", "Acute care occupancy",
-    "icu_admission", "ICUs", "critical care admission", "Critical care admissions",
-    "deaths", "Deaths", "new deaths", "Cumulative deaths"
+    "prevalence", NA, "prevalence", "Prevalence",
+    "acute_care_admission", "Hospitalisations", "acute care admission", "Acute care admissions",
+    "acute_care_occupancy", NA, "acute care occupancy", "Acute care occupancy",
+    "critical_care_admission", "ICUs", "critical care admission", "Critical care admissions",
+    "critical_care_occupancy", NA, "critical care occupancy", "Critical care admissions",
+    "deaths_total", "Deaths", "total deaths", "Cumulative deaths",
+    "deaths_new", NA, "new deaths", "New deaths"
   ) |> dplyr::mutate(outcome_label = forcats::as_factor(outcome_label)) # enforce plotting order
 }

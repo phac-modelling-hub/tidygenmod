@@ -1,0 +1,49 @@
+id,time,epi,age,value,id_scenario
+1,1,incidence,0-19,1.526717557,flu1918
+1,1,prevalence,0-19,1.526717557,flu1918
+1,1,incidence,20-64,3.435114504,flu1918
+1,1,prevalence,20-64,3.435114504,flu1918
+1,1,incidence,65+,3.053435115,flu1918
+1,1,prevalence,65+,3.053435115,flu1918
+1,1,acute care admission,0-19,0,flu1918
+1,1,acute care occupancy,0-19,0,flu1918
+1,1,acute care admission,20-64,0,flu1918
+1,1,acute care occupancy,20-64,0,flu1918
+1,1,acute care admission,65+,0,flu1918
+1,1,acute care occupancy,65+,0,flu1918
+1,1,critical care admission,0-19,0,flu1918
+1,1,critical care occupancy,0-19,0,flu1918
+1,1,critical care admission,20-64,0,flu1918
+1,1,critical care occupancy,20-64,0,flu1918
+1,1,critical care admission,65+,0,flu1918
+1,1,critical care occupancy,65+,0,flu1918
+1,1,new deaths,0-19,0,flu1918
+1,1,total deaths,0-19,0,flu1918
+1,1,new deaths,20-64,0,flu1918
+1,1,total deaths,20-64,0,flu1918
+1,1,new deaths,65+,0,flu1918
+1,1,total deaths,65+,0,flu1918
+1,2,incidence,0-19,0.944000932,flu1918
+1,2,prevalence,0-19,2.006993664,flu1918
+1,2,incidence,20-64,2.124002098,flu1918
+1,2,prevalence,20-64,4.525740665,flu1918
+1,2,incidence,65+,1.888001865,flu1918
+1,2,prevalence,65+,4.007737746,flu1918
+1,2,acute care admission,0-19,0.031775276,flu1918
+1,2,acute care occupancy,0-19,0.031775276,flu1918
+1,2,acute care admission,20-64,0.045075127,flu1918
+1,2,acute care occupancy,20-64,0.045075127,flu1918
+1,2,acute care admission,65+,0.080053355,flu1918
+1,2,acute care occupancy,65+,0.080053355,flu1918
+1,2,critical care admission,0-19,0,flu1918
+1,2,critical care occupancy,0-19,0,flu1918
+1,2,critical care admission,20-64,0,flu1918
+1,2,critical care occupancy,20-64,0,flu1918
+1,2,critical care admission,65+,0,flu1918
+1,2,critical care occupancy,65+,0,flu1918
+1,2,new deaths,0-19,0.007333821,flu1918
+1,2,total deaths,0-19,0.007333821,flu1918
+1,2,new deaths,20-64,0.010673974,flu1918
+1,2,total deaths,20-64,0.010673974,flu1918
+1,2,new deaths,65+,0.018434934,flu1918
+1,2,total deaths,65+,0.018434934,flu1918

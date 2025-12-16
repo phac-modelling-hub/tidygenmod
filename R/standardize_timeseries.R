@@ -1,10 +1,10 @@
-# Standardize outcomes across model outputs
+# Standardize timeseries across model outputs
 
 #' @param filepath Path to a file
-#' @param pop.factor_abm Population normalization factor for the ABM to rescale to outcomes per 100K individuals (since ABM can be run for different population sizes)
+#' @param pop.factor_abm (only used if input is an ABM file) Population normalization factor for the ABM to rescale to outcomes per 100K individuals (since ABM can be run for different population sizes)
 #'
-#' @return A standardized data frame with outcome values in terms of 100K individuals
-standardize_outcomes <- function(filepath, pop.factor_abm){
+#' @return A standardized data frame with timeseries of outcome in terms of 100K individuals
+standardize_timeseries <- function(filepath, pop.factor_abm=20){
   ff <- parse_filename(filepath)
   pop.factor <- ifelse(ff$model=="abm", pop.factor_abm, 41288599/1e5)
 
@@ -19,7 +19,7 @@ standardize_outcomes <- function(filepath, pop.factor_abm){
   }
 
   # standardize outcome names
-  df <- dplyr::right_join(df, lookup_outcomes() |> dplyr::select(-outcome_label), by = dplyr::join_by(epi == !!rlang::sym(ff$model))) |> dplyr::arrange(outcome_label)
+  df <- dplyr::inner_join(df, lookup_outcomes() |> dplyr::select(-outcome_label), by = dplyr::join_by(epi == !!rlang::sym(ff$model)))
 
   # final touches
   (df
