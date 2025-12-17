@@ -7,7 +7,7 @@
 #' @returns A list with fields model ("epac" or "abm"), file type ("timeseries" or "summary-metrics"), and scenario id (last part of filename)
 #' @export
 #'
-#' @examples
+#' @examples parse_filename("epac_timeseries_smallpox.csv")
 parse_filename <- function(filepath){
   # extract filename from path
   filepath_split <- stringr::str_split_1(filepath, "/")

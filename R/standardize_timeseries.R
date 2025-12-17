@@ -1,9 +1,10 @@
-# Standardize timeseries across model outputs
-
+#' Standardize timeseries across model outputs
+#'
 #' @param filepath Path to a file
 #' @param pop.factor_abm (only used if input is an ABM file) Population normalization factor for the ABM to rescale to outcomes per 100K individuals (since ABM can be run for different population sizes)
 #'
-#' @return A standardized data frame with timeseries of outcome in terms of 100K individuals
+#' @returns A standardized data frame with timeseries of outcome in terms of 100K individuals
+#' @export
 standardize_timeseries <- function(filepath, pop.factor_abm=20){
   ff <- parse_filename(filepath)
   pop.factor <- ifelse(ff$model=="abm", pop.factor_abm, 41288599/1e5)

@@ -1,11 +1,13 @@
 #' Lookup table for outcome names
 #'
+#' Lookup table for outcomes
+#'
 #' Mapping between internal (standardized) outcome label, labels for each generic model, and a human-readible label (e.g., for plotting)
 #'
-#' @returns A tibble
+#' @returns (tibble) A lookup table for outcomes
 #' @export
 #'
-#' @examples
+#' @examples lookup_outcomes()
 lookup_outcomes <- function(){
   tibble::tribble(
     ~outcome, # internal outcome variable
