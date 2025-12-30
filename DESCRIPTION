@@ -1,6 +1,6 @@
 Package: tidygenmod
 Title: Tidy Outputs From In-House Generic Models
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person("Irena", "Papst", , "irena.papst@phac-aspc.gc.ca", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
@@ -13,11 +13,7 @@ Imports:
     dplyr,
     forcats,
     readr,
-    stringr,
-    usethis (>= 3.2.1)
-Remotes: 
-    r-lib/devtools,
-    r-lib/usethis
+    stringr
 Suggests: 
     glue,
     testthat (>= 3.0.0),
