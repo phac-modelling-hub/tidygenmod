@@ -1,7 +1,7 @@
 #' Summarize range across iterations
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_range_across_iterations <- function(df){
@@ -17,9 +17,9 @@ summarize_range_across_iterations <- function(df){
 }
 
 #' Summarize outcomes by peak
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_outcomes_by_peak <- function(df){
@@ -42,11 +42,11 @@ summarize_outcomes_by_peak <- function(df){
 }
 
 #' Summarize a grouped value
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
 #' @param fun (function) Summary function
 #' @param days_horizon (numeric) Calculate summary after this many days
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_grouped_value <- function(df, fun, days_horizon){
@@ -57,14 +57,14 @@ summarize_grouped_value <- function(df, fun, days_horizon){
   if(!dplyr::is_grouped_df(df)){
     # filter in time and outcome + group
     df <- dplyr::group_by(df, dplyr::across(
-      tidyselect::all_of(c("id_scenario", "model", "id")))
+      tidyselect::all_of(c("id_scenario", "model", "outcome", "id")))
     )
   }
 
   # otherwise, compute summary
   dplyr::summarize(df,
      value = dplyr::if_else(
-       outcome == "death",
+       any(outcome == "death"), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
        max(value), # cumulative deaths mean total and peak will be the largest value (at the end)
        fun(value)
      ),
@@ -72,10 +72,10 @@ summarize_grouped_value <- function(df, fun, days_horizon){
 }
 
 #' Summarize total value
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
 #' @param days_horizon (numeric) Calculate summary after this many days
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_total <- function(df, days_horizon){
@@ -83,10 +83,10 @@ summarize_total <- function(df, days_horizon){
 }
 
 #' Summarize peak value
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
 #' @param days_horizon (numeric) Calculate summary after this many days
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_peak_value <- function(df, days_horizon){
@@ -94,10 +94,10 @@ summarize_peak_value <- function(df, days_horizon){
 }
 
 #' Summarize peak day
-#' 
+#'
 #' @param df (tibble) Standardized timeseries
 #' @param days_horizon (numeric) Calculate summary after this many days
-#' 
+#'
 #' @returns [tibble::tibble]
 #' @export
 summarize_peak_day <- function(df, days_horizon){
