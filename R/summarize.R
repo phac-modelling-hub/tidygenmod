@@ -99,7 +99,7 @@ summarize_peak_day <- function(df, days_horizon){
 
   suppressMessages(dplyr::right_join(df, peak_data)) |>
     dplyr::select(-value) |>
-    # ensure one peak is returned (in case of repeated maxima like for cummulative deaths)
+    # ensure one peak is returned (in case of repeated maxima like for cumulative deaths)
     dplyr::group_by(dplyr::across(-c(time))) |>
     dplyr::filter(time == min(time)) |>
     dplyr::ungroup() |>
