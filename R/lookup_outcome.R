@@ -17,8 +17,8 @@ lookup_outcome <- function(){
     "acute_care_occupancy", NA, "acute care occupancy",
     "critical_care_admission", "ICUs", "critical care admission",
     "critical_care_occupancy", NA, "critical care occupancy",
-    "deaths_total", "Deaths", "total deaths",
-    "deaths_new", NA, "new deaths",
+    "deaths_total", NA, "total deaths",
+    "deaths_new", "Deaths", "new deaths",
   )
 }
 

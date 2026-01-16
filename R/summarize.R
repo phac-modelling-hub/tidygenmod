@@ -84,7 +84,7 @@ summarize_grouped_value <- function(df, fun, days_horizon){
     dplyr::group_by(dplyr::across(-c(time, value))) |>
     dplyr::summarize(
        value = dplyr::if_else(
-         any(outcome == "death"), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
+         any(outcome == "deaths_total"), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
          max(value), # cumulative deaths mean total and peak will be the largest value (at the end)
          fun(value)
        ),
