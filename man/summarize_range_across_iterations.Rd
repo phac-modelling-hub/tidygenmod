@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarize.R
 \name{summarize_range_across_iterations}
 \alias{summarize_range_across_iterations}
-\title{Summarize range across iterations}
+\title{Summarize range of values across iterations}
 \usage{
 summarize_range_across_iterations(df)
 }
@@ -13,5 +13,5 @@ summarize_range_across_iterations(df)
 \link[tibble:tibble]{tibble::tibble}
 }
 \description{
-Summarize range across iterations
+Summarize range of values across iterations
 }
