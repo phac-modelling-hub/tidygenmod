@@ -1,6 +1,6 @@
 Package: tidygenmod
 Title: Tidy Outputs From In-House Generic Models
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: 
     person("Irena", "Papst", , "irena.papst@phac-aspc.gc.ca", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
