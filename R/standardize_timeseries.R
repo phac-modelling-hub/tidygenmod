@@ -21,8 +21,7 @@ standardize_timeseries <- function(filepath, pop.factor_abm=20){
   }
 
   df |> dplyr::inner_join( # standardized outcome names
-    lookup_outcomes() |>
-      dplyr::select(-outcome_label),
+    lookup_outcome(),
     by = dplyr::join_by(epi == !!rlang::sym(ff$model))) |>
     dplyr::mutate(
       model = !!ff$model,
