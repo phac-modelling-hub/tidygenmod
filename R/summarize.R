@@ -50,19 +50,19 @@ summarize_outcomes_by_peak <- function(df){
 #' @returns [tibble::tibble]
 #' @export
 summarize_grouped_value <- function(df, fun, days_horizon){
-
   df |>
     # filter in time
     dplyr::filter(time <= days_horizon) |>
     # compute (grouped) summary
     dplyr::group_by(dplyr::across(-c(time, value))) |>
-    dplyr::summarize(df,
+    dplyr::summarize(
        value = dplyr::if_else(
          any(outcome == "death"), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
          max(value), # cumulative deaths mean total and peak will be the largest value (at the end)
          fun(value)
        ),
-       .groups = "drop")
+       .groups = "drop"
+    )
 }
 
 #' Summarize total value
@@ -97,14 +97,16 @@ summarize_peak_value <- function(df, days_horizon){
 summarize_peak_day <- function(df, days_horizon){
   peak_data <- summarize_peak_value(df, days_horizon)
 
+  # match peak value to day
   suppressMessages(dplyr::right_join(df, peak_data)) |>
     dplyr::select(-value) |>
     # ensure one peak is returned (in case of repeated maxima like for cumulative deaths)
     dplyr::group_by(dplyr::across(-c(time))) |>
     dplyr::filter(time == min(time)) |>
     dplyr::ungroup() |>
+    # return in same format as for other summarize_*()
     dplyr::rename(value = time) |>
-    dplyr::select(dplyr::all_of(names(peak_data)))
+    dplyr::select(dplyr::all_of(names(peak_data))) 
 }
 
 
