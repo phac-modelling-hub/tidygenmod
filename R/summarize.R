@@ -55,7 +55,7 @@ summarize_grouped_value <- function(df, fun, days_horizon){
     # filter in time
     dplyr::filter(time <= days_horizon) |>
     # compute (grouped) summary
-    dplyr::group_by(dplyr::across(-c(time, value)))
+    dplyr::group_by(dplyr::across(-c(time, value))) |>
     dplyr::summarize(df,
        value = dplyr::if_else(
          any(outcome == "death"), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
