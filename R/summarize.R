@@ -1,11 +1,11 @@
-#' Summarize range across iterations
+#' Summarize range of values across iterations
 #'
 #' @param df (tibble) Standardized timeseries
 #'
 #' @returns [tibble::tibble]
 #' @export
 summarize_range_across_iterations <- function(df){
-  (df
+  df <- (df
    |> dplyr::group_by(dplyr::across(-c(id, value)))
    |> dplyr::summarize(
      med = mean(value),
@@ -14,6 +14,33 @@ summarize_range_across_iterations <- function(df){
      .groups = "drop"
    )
   )
+
+  attr(df, "ci") <- "range"
+
+  df
+}
+
+#' Summarize confidence interval of values across iterations
+#'
+#' @param df (tibble) Standardized timeseries
+#' @param ci (numeric) Proportion for confidence interval (e.g., 0.95 corresponds to the 95% confidence interval)
+#'
+#' @returns [tibble::tibble]
+#' @export
+summarize_ci_across_iterations <- function(df, ci){
+  df <- (df
+   |> dplyr::group_by(dplyr::across(-c(id, value)))
+   |> dplyr::summarize(
+     med = median(value),
+     lwr = quantile(value, probs = (1-ci)/2, names = FALSE),
+     upr = quantile(value, probs = 1-(1-ci)/2, names = FALSE),
+     .groups = "drop"
+   )
+  )
+
+  attr(df, "ci") <- ci
+
+  df
 }
 
 #' Summarize outcomes by peak
