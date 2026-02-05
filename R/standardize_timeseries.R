@@ -15,7 +15,7 @@ standardize_timeseries <- function(filepath, pop.factor_abm=20){
   if(ff$model=="abm"){
     df <- dplyr::rename(
       df,
-      id = IT, time = DAY, epi = OUTCOME,
+      id_sim = IT, time = DAY, epi = OUTCOME,
       age = AGE_GRP, value = VALUE
     )
   }
@@ -29,6 +29,6 @@ standardize_timeseries <- function(filepath, pop.factor_abm=20){
     ) |>
     dplyr::mutate(value = value/pop.factor) |>
     dplyr::select(
-      id_scenario, model, outcome, time, id, age, value
+      id_scenario, model, outcome, time, id_sim, age, value
     )
 }
