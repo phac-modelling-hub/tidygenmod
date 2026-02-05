@@ -1,13 +1,14 @@
 #' Standardize timeseries across model outputs
 #'
 #' @param filepath Path to a file
-#' @param pop.factor_abm (only used if input is an ABM file) Population normalization factor for the ABM to rescale to outcomes per 100K individuals (since ABM can be run for different population sizes)
+#' @param pop_size_norm Population size used for normalization (e.g., pop_size_norm=1e5 would report values per 100K)
+#' @param pop_size_abm (only used if input is an ABM file) Population size used for ABM simulation
 #'
-#' @returns A standardized data frame with timeseries of outcome in terms of 100K individuals
+#' @returns A standardized data frame with normalized timeseries of outcomes
 #' @export
-standardize_timeseries <- function(filepath, pop.factor_abm=20){
+standardize_timeseries <- function(filepath, pop_size_norm=1e5, pop_size_abm=2e6){
   ff <- parse_filename(filepath)
-  pop.factor <- ifelse(ff$model=="abm", pop.factor_abm, 41288599/1e5)
+  pop.factor <- ifelse(ff$model=="abm", pop_size_abm, 41288599)/pop_size_norm
 
   df <- readr::read_csv(filepath, show_col_types = FALSE)
 

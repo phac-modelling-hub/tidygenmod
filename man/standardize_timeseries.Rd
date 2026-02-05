@@ -4,15 +4,17 @@
 \alias{standardize_timeseries}
 \title{Standardize timeseries across model outputs}
 \usage{
-standardize_timeseries(filepath, pop.factor_abm = 20)
+standardize_timeseries(filepath, pop_size_norm = 1e+05, pop_size_abm = 2e+06)
 }
 \arguments{
 \item{filepath}{Path to a file}
 
-\item{pop.factor_abm}{(only used if input is an ABM file) Population normalization factor for the ABM to rescale to outcomes per 100K individuals (since ABM can be run for different population sizes)}
+\item{pop_size_norm}{Population size used for normalization (e.g., pop_size_norm=1e5 would report values per 100K)}
+
+\item{pop_size_abm}{(only used if input is an ABM file) Population size used for ABM simulation}
 }
 \value{
-A standardized data frame with timeseries of outcome in terms of 100K individuals
+A standardized data frame with normalized timeseries of outcomes
 }
 \description{
 Standardize timeseries across model outputs
