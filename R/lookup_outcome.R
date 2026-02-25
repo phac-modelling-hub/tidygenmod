@@ -20,7 +20,8 @@ lookup_outcome <- function(){
     "deaths_total", NA, "total deaths",
     "deaths_new", "Deaths", "new deaths",
     "treated_total", NA, "total treated",
-    "treated_new", NA, "new treated"
+    "treated_new", "Treated", "new treated",
+    "treated_new", "PEP_Treated", NA # duplicate standard label; works if only ever going model-specific -> standard label
   )
 }
 
@@ -41,6 +42,8 @@ lookup_outcome_label <- function(){
     "critical_care_admission", "Critical care admissions",
     "critical_care_occupancy", "Critical care admissions",
     "deaths_total", "Cumulative deaths",
-    "deaths_new", "New deaths"
+    "deaths_new", "New deaths",
+    "treated_new", "New treated",
+    "treated_total", "Total treated"
   ) |> dplyr::mutate(outcome_label = forcats::as_factor(outcome_label)) # enforce plotting order
 }
