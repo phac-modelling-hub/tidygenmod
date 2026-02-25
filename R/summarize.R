@@ -6,7 +6,7 @@
 #' @export
 summarize_range_across_iterations <- function(df){
   df <- (df
-   |> dplyr::group_by(dplyr::across(-c(id, value)))
+   |> dplyr::group_by(dplyr::across(-c(id_sim, value)))
    |> dplyr::summarize(
      med = mean(value),
      lwr = min(value),
@@ -29,7 +29,7 @@ summarize_range_across_iterations <- function(df){
 #' @export
 summarize_ci_across_iterations <- function(df, ci){
   df <- (df
-   |> dplyr::group_by(dplyr::across(-c(id, value)))
+   |> dplyr::group_by(dplyr::across(-c(id_sim, value)))
    |> dplyr::summarize(
      med = median(value),
      lwr = quantile(value, probs = (1-ci)/2, names = FALSE),
@@ -57,12 +57,12 @@ summarize_outcomes_by_peak <- function(df){
     |> dplyr::filter(rank == min(rank) | rank == round(median(rank)) | rank ==max(rank))
     |> dplyr::arrange(rank)
     |> dplyr::mutate(type = c("lwr", "med", "upr"))
-    |> dplyr::select(id_scenario, model, id, type)
+    |> dplyr::select(id_scenario, model, id_sim, type)
    )
 
   (df
     |> dplyr::right_join(rank_lookup,
-                        by = dplyr::join_by(id_scenario, model, id))
+                        by = dplyr::join_by(id_scenario, model, id_sim))
     |> tidyr::pivot_wider(id_cols = c("id_scenario", "model", "outcome", "time", "outcome_label"),
                           names_from = type)
   )
