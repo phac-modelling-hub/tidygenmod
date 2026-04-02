@@ -76,15 +76,15 @@ summarize_outcomes_by_peak <- function(df){
 #'
 #' @returns [tibble::tibble]
 #' @export
-summarize_grouped_value <- function(df, fun, days_horizon){
+summarize_grouped_value <- function(df, fun, days_horizon = NULL){
+  if(!is.null(days_horizon)) df <- dplyr::filter(df, time <= days_horizon)
+
   df |>
-    # filter in time
-    dplyr::filter(time <= days_horizon) |>
     # compute (grouped) summary
     dplyr::group_by(dplyr::across(-c(time, value))) |>
     dplyr::summarize(
        value = dplyr::if_else(
-         any(outcome %in% c("deaths_total", "treated_total")), # if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
+         any(stringr::str_detect(outcome, "total")), # looking for value already reported as cummulative; use any() because if else is vectorized, so need to make sure we're returning one logical to get back one value for the summary
          max(value), # cumulative deaths mean total and peak will be the largest value (at the end)
          fun(value)
        ),
@@ -99,7 +99,7 @@ summarize_grouped_value <- function(df, fun, days_horizon){
 #'
 #' @returns [tibble::tibble]
 #' @export
-summarize_total <- function(df, days_horizon){
+summarize_total <- function(df, days_horizon = NULL){
   summarize_grouped_value(df = df, fun = sum, days_horizon = days_horizon)
 }
 
@@ -110,7 +110,7 @@ summarize_total <- function(df, days_horizon){
 #'
 #' @returns [tibble::tibble]
 #' @export
-summarize_peak_value <- function(df, days_horizon){
+summarize_peak_value <- function(df, days_horizon = NULL){
   summarize_grouped_value(df = df, fun = max, days_horizon = days_horizon)
 }
 
@@ -121,13 +121,14 @@ summarize_peak_value <- function(df, days_horizon){
 #'
 #' @returns [tibble::tibble]
 #' @export
-summarize_peak_day <- function(df, days_horizon){
-  peak_data <- summarize_peak_value(df, days_horizon)
+summarize_peak_day <- function(df, days_horizon = NULL){
+  peak_data <- summarize_peak_value(df, days_horizon = days_horizon)
 
   # match peak value to day
   suppressMessages(dplyr::right_join(df, peak_data)) |>
     dplyr::select(-value) |>
     # ensure one peak is returned (in case of repeated maxima like for cumulative deaths)
+    # the first time peak is reached
     dplyr::group_by(dplyr::across(-c(time))) |>
     dplyr::filter(time == min(time)) |>
     dplyr::ungroup() |>
