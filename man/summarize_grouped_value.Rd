@@ -4,7 +4,7 @@
 \alias{summarize_grouped_value}
 \title{Summarize a grouped value}
 \usage{
-summarize_grouped_value(df, fun, days_horizon)
+summarize_grouped_value(df, fun, days_horizon = NULL)
 }
 \arguments{
 \item{df}{(tibble) Standardized timeseries}

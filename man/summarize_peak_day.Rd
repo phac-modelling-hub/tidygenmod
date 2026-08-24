@@ -4,7 +4,7 @@
 \alias{summarize_peak_day}
 \title{Summarize peak day}
 \usage{
-summarize_peak_day(df, days_horizon)
+summarize_peak_day(df, days_horizon = NULL)
 }
 \arguments{
 \item{df}{(tibble) Standardized timeseries}

@@ -4,7 +4,7 @@
 \alias{summarize_total}
 \title{Summarize total value}
 \usage{
-summarize_total(df, days_horizon)
+summarize_total(df, days_horizon = NULL)
 }
 \arguments{
 \item{df}{(tibble) Standardized timeseries}
