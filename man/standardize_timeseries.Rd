@@ -4,7 +4,12 @@
 \alias{standardize_timeseries}
 \title{Standardize timeseries across model outputs}
 \usage{
-standardize_timeseries(filepath, pop_size_norm = 1e+05, pop_size_abm = 2e+06)
+standardize_timeseries(
+  filepath,
+  pop_size_norm = 1e+05,
+  pop_size_abm = 2e+06,
+  by_pt = FALSE
+)
 }
 \arguments{
 \item{filepath}{Path to a file}
@@ -12,9 +17,18 @@ standardize_timeseries(filepath, pop_size_norm = 1e+05, pop_size_abm = 2e+06)
 \item{pop_size_norm}{Population size used for normalization (e.g., pop_size_norm=1e5 would report values per 100K)}
 
 \item{pop_size_abm}{(only used if input is an ABM file) Population size used for ABM simulation}
+
+\item{by_pt}{(logical) If the input file is disaggregated by province/territory
+(i.e., it has a \code{PT} column), should the standardized output preserve that
+disaggregation? When \code{FALSE} (the default), values are summed across
+provinces/territories to reproduce the aggregated output. When \code{TRUE}, a
+\code{pt} column is added to the output. Has no effect for files without a \code{PT}
+column.}
 }
 \value{
-A standardized data frame with normalized timeseries of outcomes
+A standardized data frame with normalized timeseries of outcomes. When
+\code{by_pt = TRUE} and the input is disaggregated by province/territory, the
+output includes an additional \code{pt} column.
 }
 \description{
 Standardize timeseries across model outputs

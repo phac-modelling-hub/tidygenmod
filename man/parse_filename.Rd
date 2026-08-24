@@ -15,6 +15,11 @@ A list with fields model ("epac" or "abm"), file type ("timeseries" or "summary-
 \description{
 Parse standardized filename from model output. Compatible with filenames of format \verb{[[model]]_[[filetype]]_[[id_scenario]].csv}.
 }
+\details{
+Filenames may include an optional \code{pt} token immediately after the filetype
+(e.g., \code{abm_timeseries_pt_sarscov2_I0.csv}) to flag province/territory
+disaggregated files; this token is dropped from the returned \code{id_scenario}.
+}
 \examples{
 parse_filename("epac_timeseries_smallpox.csv")
 }
